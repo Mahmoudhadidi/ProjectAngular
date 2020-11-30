@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tasks',
@@ -11,13 +12,33 @@ export class TasksComponent implements OnInit {
   searchText='';
   editForm=false;
   showForm= false;
+  closeResult = '';
   myTask: Task={
    label:'',
    completed: false
   }
 tasks:Task[]=[];
 resultTasks:Task[]=[];
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService,private modalService: NgbModal) { }
+  
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 
   ngOnInit(): void {
     this.getTasks();
@@ -31,7 +52,8 @@ resultTasks:Task[]=[];
   deleteTask(id){
     this.taskService.delete(id)
         .subscribe(() => {
-           this.tasks=this.tasks.filter(task => task.id != id)
+           this.tasks=this.tasks.filter(task => task.id != id);
+           this.getTasks();
         })
   }
   persistTask(){
@@ -39,7 +61,7 @@ resultTasks:Task[]=[];
         .subscribe((task)=>{
           this.tasks=[task, ...this.tasks];
           this.resetTask();
-          this.showForm=false;
+          this.getTasks();
         })
   }
   resetTask(){
@@ -63,8 +85,9 @@ resultTasks:Task[]=[];
   updateTask(){
     this.taskService.update(this.myTask)
         .subscribe(task=>{
-          this.resetTask()
+          this.resetTask();
           this.editForm=false;
+          this.getTasks();
         })
   }
   searchTasks(){

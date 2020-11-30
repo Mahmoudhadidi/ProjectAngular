@@ -8,17 +8,23 @@ import { TasksComponent } from './tasks/tasks.component';
 
 import{HttpClientModule} from'@angular/common/http';
 import{FormsModule} from'@angular/forms';
+import { MatiereComponent } from './matiere/matiere.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TasksComponent
+    TasksComponent,
+    MatiereComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
