@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task';
 import { TaskService } from '../services/task.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Matiere } from '../models/matiere';
 
 @Component({
   selector: 'app-tasks',
@@ -15,21 +16,25 @@ export class TasksComponent implements OnInit {
   closeResult = '';
   myTask: Task={
    label:'',
-   completed: false
+   completed: false,
+   idMatiere:1,
   }
 tasks:Task[]=[];
+matieres:Matiere[]=[];
 resultTasks:Task[]=[];
+resultMatiere:Matiere[]=[];
+resultMatiereById:Matiere[]=[];
   constructor(private taskService: TaskService,private modalService: NgbModal) { }
   
-  open(content) {
+open(content) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-  }
+ }
 
-  private getDismissReason(reason: any): string {
+private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -38,16 +43,25 @@ resultTasks:Task[]=[];
       return `with: ${reason}`;
     }
   }
-
-
   ngOnInit(): void {
     this.getTasks();
+    this.getMatiere();
   }
 
   getTasks(){
     this.taskService.findAll()
         .subscribe(tasks => 
           this.resultTasks=this.tasks=tasks)
+  }
+  getMatiere(){
+    this.taskService.findAllMatiere()
+    .subscribe(matieres => 
+      this.resultMatiere=this.matieres=matieres)
+  }
+  getMatiereByID(id){
+    this.taskService.findMatiereById(id)
+    .subscribe(matieres => 
+      this.resultMatiereById=this.matieres=matieres)
   }
   deleteTask(id){
     this.taskService.delete(id)
@@ -67,12 +81,13 @@ resultTasks:Task[]=[];
   resetTask(){
     this.myTask={
       label:'',
-      completed:false
+      completed:false,
+      idMatiere:null
     }
   }
 
   toggleCompleted(task){
-    this.taskService.completed(task.id,task.completed)
+  this.taskService.completed(task.id,task.completed)
         .subscribe(() => {
          task.completed=!task.completed 
         })
@@ -83,7 +98,7 @@ resultTasks:Task[]=[];
   }
   
   updateTask(){
-    this.taskService.update(this.myTask)
+  this.taskService.update(this.myTask)
         .subscribe(task=>{
           this.resetTask();
           this.editForm=false;
@@ -91,6 +106,6 @@ resultTasks:Task[]=[];
         })
   }
   searchTasks(){
-    this.resultTasks= this.tasks.filter((task)=> task.label.toLowerCase().includes(this.searchText.toLocaleLowerCase()))
+  this.resultTasks= this.tasks.filter((task)=> task.label.toLowerCase().includes(this.searchText.toLocaleLowerCase()))
   }
 }

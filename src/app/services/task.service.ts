@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Matiere } from '../models/matiere';
 import { Task } from '../models/task';
 
 @Injectable({
@@ -7,11 +9,18 @@ import { Task } from '../models/task';
 })
 export class TaskService {
   apiurl="http://localhost:3000/tasks";
-
+  apiurlMatiere="http://localhost:3000/matiere";
+  
   constructor(private http: HttpClient) { }
 
   findAll(){
     return this.http.get<Task[]>(this.apiurl);
+  }
+  findMatiereById(id): Observable<Matiere[]> {
+    return this.http.get<Matiere[]>(this.apiurlMatiere+'/'+id);
+}
+  findAllMatiere(){
+    return this.http.get<Matiere[]>(this.apiurlMatiere);
   }
   delete(id){
     return this.http.delete(this.apiurl+'/'+id)
