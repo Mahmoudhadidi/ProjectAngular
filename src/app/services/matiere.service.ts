@@ -13,9 +13,6 @@ export class MatiereService {
   findAll(){
     return this.http.get<Matiere[]>(this.apiurl);
     }
-  findAllMatiere(){
-    return this.http.get<Matiere[]>(this.apiurl);
-  }
   delete(id){
     return this.http.delete(this.apiurl+'/'+id)
   }

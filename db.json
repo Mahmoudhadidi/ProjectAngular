@@ -7,12 +7,6 @@
       "idMatiere": "3"
     },
     {
-      "label": "learn Java",
-      "completed": true,
-      "id": 3,
-      "idMatiere": 2
-    },
-    {
       "label": "angular",
       "completed": true,
       "id": 4,
@@ -39,52 +33,22 @@
   ],
   "matiere": [
     {
-      "id": 1,
-      "nom": "nom 1",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
-      "id": 2,
-      "nom": "nom 2",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
-      "id": 3,
-      "nom": "nom 3",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
       "id": 4,
       "nom": "nom 4",
       "coefficient": 2,
       "categorie": "Reseau"
     },
     {
-      "id": 4,
-      "nom": "nom 4",
-      "coefficient": 2,
-      "categorie": "Reseau"
+      "nom": "hhfh",
+      "coefficient": "12",
+      "categorie": "fff",
+      "id": 8
     },
     {
-      "id": 5,
-      "nom": "nom 3",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
-      "id": 6,
-      "nom": "nom 3",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
-      "id": 7,
-      "nom": "nom 3",
-      "coefficient": 2,
-      "categorie": "Reseau"
+      "nom": "hazem",
+      "coefficient": 12,
+      "categorie": "fff",
+      "id": 9
     }
   ]
 }

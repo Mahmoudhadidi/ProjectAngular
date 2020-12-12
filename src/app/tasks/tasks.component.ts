@@ -20,10 +20,9 @@ export class TasksComponent implements OnInit {
    idMatiere:1,
   }
 tasks:Task[]=[];
-matieres:Matiere[]=[];
 resultTasks:Task[]=[];
+matieres:Matiere[]=[];
 resultMatiere:Matiere[]=[];
-resultMatiereById:Matiere[]=[];
   constructor(private taskService: TaskService,private modalService: NgbModal) { }
   
 open(content) {
@@ -57,11 +56,6 @@ private getDismissReason(reason: any): string {
     this.taskService.findAllMatiere()
     .subscribe(matieres => 
       this.resultMatiere=this.matieres=matieres)
-  }
-  getMatiereByID(id){
-    this.taskService.findMatiereById(id)
-    .subscribe(matieres => 
-      this.resultMatiereById=this.matieres=matieres)
   }
   deleteTask(id){
     this.taskService.delete(id)
