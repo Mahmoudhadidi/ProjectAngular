@@ -19,9 +19,14 @@ export class MatiereComponent implements OnInit {
     coefficient:1,
     categorie:'',
    }
-  
+  m:Matiere={
+    nom:'',
+    coefficient:1,
+    categorie:'',
+  }
 matieres:Matiere[]=[];
 resultMatiere:Matiere[]=[];
+
   constructor(private matiereService: MatiereService,private modalService: NgbModal) { 
 
   }
@@ -45,11 +50,13 @@ private getDismissReason(reason: any): string {
   ngOnInit(): void {
     this.getMatiere();
     this.myForm=new FormGroup({
+      id:new FormControl(''),
       nom:new FormControl('',Validators.required),
       coefficient:new FormControl('',[Validators.required]),
       categorie:new FormControl('',[Validators.required]),
     })
   }
+  get id(){ return this.myForm.get('id');}
   get nom(){ return this.myForm.get('nom');}
   get coefficient(){ return this.myForm.get('coefficient');}
   get categorie(){ return this.myForm.get('categorie');}
@@ -67,15 +74,17 @@ private getDismissReason(reason: any): string {
         })
   }
   persistMatiere(){
-    this.myMatiere.nom=this.nom.value;
-    this.myMatiere.coefficient=this.coefficient.value;
-    this.myMatiere.categorie=this.categorie.value;
-    this.matiereService.persist(this.myMatiere)
+    this.m.nom=this.nom.value;
+    this.m.coefficient=this.coefficient.value;
+    this.m.categorie=this.categorie.value;
+    this.matiereService.persist(this.m)
         .subscribe((matiere)=>{
           this.matieres=[matiere, ...this.matieres];
           this.resetMatiere();
           this.getMatiere();
+          
         })
+        
   }
   resetMatiere(){
     this.myForm=new FormGroup({
@@ -88,6 +97,7 @@ private getDismissReason(reason: any): string {
  
   editMatiere(matiere){
     this.myForm.setValue({
+      id:matiere.id,
       nom : matiere.nom,
     coefficient: matiere.coefficient,
     categorie: matiere.categorie,});
@@ -95,10 +105,17 @@ private getDismissReason(reason: any): string {
   }
   
   updateMatiere(){
+    this.myMatiere.id=this.id.value;
+    this.myMatiere.nom=this.nom.value;
+    this.myMatiere.coefficient=this.coefficient.value;
+    this.myMatiere.categorie=this.categorie.value;
+
+  this.matiereService.update(this.myMatiere)
+        .subscribe(task=>{
           this.resetMatiere();
           this.editForm=false;
           this.getMatiere();
-        
+        })
   }
   searchMatiere(){
   this.resultMatiere= this.matieres.filter((matiere)=> matiere.nom.toLowerCase().includes(this.searchText.toLocaleLowerCase()))

@@ -26,6 +26,7 @@
             <div class="col md-6 mx-auto">
                 
     <form [formGroup]="myForm" >
+                    <input type="hidden" name="id">
                     <div class="form-group">
                      <input type="text"  name="nom" placeholder="Nom..." formControlName="nom" class="form-control">
                     </div>
@@ -37,10 +38,10 @@
                     </div>
                 
                     <div class="modal-footer">
-                        <button *ngIf="editForm" (click)="updateMatiere()"  class="btn btn-warning btn-block ">
+                        <button *ngIf="editForm" (click)="updateMatiere()" (click)="modal.dismiss('Cross click')" class="btn btn-warning btn-block ">
                             <i class="fa fa-refresh"></i> Update Matiere
                         </button>
-                        <button type="submit" *ngIf="!editForm"[disabled]="!myForm.valid" (click)="persistMatiere()" class="btn btn-success btn-block ">
+                        <button type="submit" *ngIf="!editForm"[disabled]="!myForm.valid" (click)="persistMatiere()" (click)="modal.dismiss('Cross click')" class="btn btn-success btn-block ">
                             <i class="fa fa-send"></i> New Matiere
                         </button>
                     </div>

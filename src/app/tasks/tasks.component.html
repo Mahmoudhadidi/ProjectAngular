@@ -25,8 +25,9 @@
         <div class="row" >
             <div class="col md-6 mx-auto">
                 <div class="form-group">
+                
                     
-                    <input [(ngModel)]="myTask.label" id="label" placeholder="task..." type="text" class="form-control">
+                    <input [(ngModel)]="myTask.label" id="label" placeholder="task..." type="text"  required class="form-control">
                 </div>
                 
               
@@ -34,7 +35,7 @@
 
                     <select [(ngModel)]="myTask.idMatiere" class="form-control" id="idMatiere">
                         
-                        <option *ngFor="let matiere of resultMatiere" [value]="matiere.id">
+                        <option *ngFor="let matiere of resultMatiere"   [value]="matiere.id">
                             {{matiere.nom}}
                           </option>
                     </select>
@@ -57,7 +58,7 @@
         <button *ngIf="editForm" (click)="updateTask()" (click)="modal.close('Save click')" class="btn btn-warning btn-block ">
             <i class="fa fa-refresh"></i> Update Task
         </button>
-        <button *ngIf="!editForm" (click)="persistTask()" (click)="modal.close('Save click')" class="btn btn-success btn-block ">
+        <button *ngIf="!editForm" (click)="persistTask()" [disabled]="!myTask.label" class="btn btn-success btn-block ">
             <i class="fa fa-send"></i> New Task
         </button>
     </div>

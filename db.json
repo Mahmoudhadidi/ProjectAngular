@@ -4,51 +4,33 @@
       "id": 2,
       "label": "Learn Spring boot",
       "completed": true,
-      "idMatiere": "3"
-    },
-    {
-      "label": "angular",
-      "completed": true,
-      "id": 4,
-      "idMatiere": 1
-    },
-    {
-      "label": "Learn Spring boot",
-      "completed": false,
-      "idMatiere": "2",
-      "id": 5
-    },
-    {
-      "label": "Learn Spring boot",
-      "completed": false,
-      "idMatiere": "1",
-      "id": 6
-    },
-    {
-      "label": "Learn Spring boot",
-      "completed": false,
-      "idMatiere": "3",
-      "id": 7
+      "idMatiere": "8"
     }
   ],
   "matiere": [
     {
-      "id": 4,
-      "nom": "nom 4",
-      "coefficient": 2,
-      "categorie": "Reseau"
-    },
-    {
-      "nom": "hhfh",
-      "coefficient": "12",
-      "categorie": "fff",
+      "nom": "angular",
+      "coefficient": 3,
+      "categorie": "web",
       "id": 8
     },
     {
-      "nom": "hazem",
-      "coefficient": 12,
-      "categorie": "fff",
+      "nom": "Spring",
+      "coefficient": 3,
+      "categorie": "Java",
       "id": 9
+    },
+    {
+      "nom": "MongoDb",
+      "coefficient": 2,
+      "categorie": "SQL",
+      "id": 10
+    },
+    {
+      "nom": "Reseau",
+      "coefficient": 3,
+      "categorie": "Reseau",
+      "id": 11
     }
   ]
 }
